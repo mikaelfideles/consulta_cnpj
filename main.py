@@ -3,6 +3,12 @@ from datetime import datetime
 import pyautogui as pg
 import pandas as pd
 import clipboard
+import tkinter as tk
+from tkinter import messagebox
+
+# Criar uma janela Tkinter
+root = tk.Tk()
+root.withdraw()  # Esconder a janela principal
 
 # Ler o arquivo Excel com os dados das consultas
 consulta = pd.read_excel(r'consulta_cnpj.xlsx', dtype=str)
@@ -12,7 +18,7 @@ consulta = consulta.fillna('')
 
 # Registrar o momento de início da coleta de dados
 now = datetime.now()
-inicio_coleta = now.strftime("%d %m %Y %Hh %Mmin %Ss")
+inicio_coleta = now.strftime("%d%m%Y_%H%M%S")
 
 time.sleep(10)
 print('Iniciando coleta...')    
@@ -26,13 +32,10 @@ for i, linha in consulta.iterrows():
 
     # Exibir informações relevantes
     print('-----------------------------------------')
-    now = datetime.now()
-    dt_string = now.strftime("%d %m %Y %Hh %Mmin %Ss")
-    print("date and time =", dt_string)
     print(linha['QTDE_CONSULTA'])
     print('num_doc: ' + linha['NUM_CNPJ'])
   
-    presses = 7
+    presses = 6
 
     # Pressiona a tecla "Tab" várias vezes com um intervalo de 0.1 segundo
     for _ in range(presses):
@@ -58,18 +61,17 @@ for i, linha in consulta.iterrows():
     time.sleep(0.1)
     print(linha['COLETA'])
     time.sleep(0.1)
-    #time.sleep(1)
 
-    # Salvar o DataFrame 'consulta' em um arquivo Excel
-    #consulta.to_excel(r'consulta/consulta_cnpj_iniciada_em ' + str(inicio_coleta) + '.xlsx', index=False)
-    consulta.to_excel(r'coleta/coleta.xlsx', index=False)
+    nome_do_arquivo_excel = 'coleta_temp\coleta_temp.xlsx'
+    consulta.to_excel(nome_do_arquivo_excel, index=False)
 
 # Exibir uma mensagem indicando que o programa foi finalizado
 print('Coleta finalizada!')
 
+'---------------------------------------------------'
 
 # Ler o arquivo Excel
-consulta = pd.read_excel(r'coleta\coleta.xlsx', dtype=str)
+consulta = pd.read_excel(r'coleta_temp\coleta_temp.xlsx', dtype=str)
 
 # Lista para armazenar as linhas divididas em colunas
 linhas_divididas = []
@@ -118,8 +120,13 @@ colunas_selecionadas = ['Data da consulta',
                         'Situação no SIMEI']
 df = df[colunas_selecionadas]
 
-# Exportar o DataFrame para um arquivo Excel
-nome_do_arquivo_excel = 'coleta\coleta_dividida.xlsx'
+nome_do_arquivo_excel = 'coleta\coleta_' + str(inicio_coleta) + '.xlsx'
 df.to_excel(nome_do_arquivo_excel, index=False)
 
 print(f'DataFrame exportado para {nome_do_arquivo_excel} com sucesso!')
+
+# Exibir uma mensagem de pop-up indicando que o programa foi finalizado
+messagebox.showinfo("Programa Finalizado", "O programa foi finalizado com sucesso!")
+
+# Fechar a janela Tkinter
+root.destroy()
