@@ -1,0 +1,7 @@
+fazer contagem dos caracteres consultados no campo de coleta
+
+>=40
+
+mensagem de conclusão (pop-up)
+
+separar pasta coleta x coleta dividida (add data de execução)
