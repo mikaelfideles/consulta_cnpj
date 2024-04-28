@@ -5,3 +5,5 @@ fazer contagem dos caracteres consultados no campo de coleta
 mensagem de conclusão (pop-up)
 
 separar pasta coleta x coleta dividida (add data de execução)
+
+teste github
