@@ -4,7 +4,11 @@ Este projeto tem como objetivo fornecer uma ferramenta simples e eficiente para 
 
 ## Funcionalidades
 
-Consulta de CNPJ: Permite consultar informações detalhadas de um CNPJ específico, como CNPJ; Nome; Situação Simples Nacional; Situação SIMEI.
+Permite consultar informações detalhadas de um CNPJ específico, como:
+- CNPJ;
+- Nome;
+- Situação Simples Nacional;
+- Situação SIMEI.
 
 ## Como Usar
  
