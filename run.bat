@@ -1,5 +1,5 @@
 @echo off
-cd "C:\Users\mikae\OneDrive\Documentos\consulta_cnpj\venv_consulta_cnpj\Scripts"
+cd "C:\Users\...\consulta_cnpj\venv_consulta_cnpj\Scripts"
 call activate
 cd ..
 cd ..
