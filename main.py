@@ -34,7 +34,7 @@ for i, linha in consulta.iterrows():
     time.sleep(2)
 
     # Exibir informações relevantes
-    print('-----------------------------------------')
+    print('---------------------')
     print(f'CONSULTA: {i + 1} de {len(consulta)}')
     print('CNPJ: ' + linha['NUM_CNPJ'])
   
@@ -75,8 +75,8 @@ for i, linha in consulta.iterrows():
         time.sleep(2)
 
         # Exibir informações relevantes
-        print('-----------------------------------------')
-        print(linha['QTDE_CONSULTA'])
+        print('---------------------')
+        print(f'CONSULTA: {i + 1} de {len(consulta)}')
         print('num_doc: ' + linha['NUM_CNPJ'])
     
         # Pressiona a tecla "tab" por n vezes
@@ -103,7 +103,8 @@ for i, linha in consulta.iterrows():
         # Atualizar os dados copiados na coluna 'COLETA'
         linha['COLETA'] = clipboard.paste()
 
-    print(linha['COLETA'])
+    #print(linha['COLETA'])
+    print('✓')
     time.sleep(0.1)
 
     nome_do_arquivo_excel = r'02_coleta_temp\coleta_temp.xlsx'
@@ -112,7 +113,7 @@ for i, linha in consulta.iterrows():
 # Exibir uma mensagem indicando que o programa foi finalizado
 print('Coleta finalizada!')
 
-'---------------------------------------------------'
+'---------------------'
 
 # Ler o arquivo Excel
 consulta = pd.read_excel(r'02_coleta_temp\coleta_temp.xlsx', dtype=str)
@@ -140,16 +141,16 @@ df = pd.DataFrame(linhas_divididas)
 
 # Renomear as colunas
 nomes_colunas = {
-    0: 'Consulta Optantes',
-    1: 'Data da consulta',
-    2: 'Identificação do Contribuinte',
+    0: 'CONSULTA_OPTANTES',
+    1: 'DATA_CONSULTA',
+    2: 'IDENTIFICACAO_CONTRIBUINTE',
     3: 'CNPJ',
     4: '4',
     5: '5',
-    6: 'Nome Empresarial',
+    6: 'NOME',
     7: '7',
-    8: 'Situação no Simples Nacional',
-    9: 'Situação no SIMEI',
+    8: 'SITUACAO_SIMPLES_NACIONAL',
+    9: 'SITUACAO_SIMEI',
     10: '10',
     11: '11'
 }
@@ -157,11 +158,11 @@ nomes_colunas = {
 df = df.rename(columns=nomes_colunas)
 
 # Selecionar colunas específicas
-colunas_selecionadas = ['Data da consulta',
+colunas_selecionadas = ['DATA_CONSULTA',
                         'CNPJ',
-                        'Nome Empresarial',
-                        'Situação no Simples Nacional',
-                        'Situação no SIMEI']
+                        'NOME',
+                        'SITUACAO_SIMPLES_NACIONAL',
+                        'SITUACAO_SIMEI']
 df = df[colunas_selecionadas]
 
 nome_do_arquivo_excel = r'03_coleta\coleta_' + str(inicio_coleta) + '.xlsx'
@@ -170,7 +171,7 @@ df.to_excel(nome_do_arquivo_excel, index=False)
 print(f'DataFrame exportado para {nome_do_arquivo_excel} com sucesso!')
 
 # Exibir uma mensagem de pop-up indicando que o programa foi finalizado
-messagebox.showinfo("Programa Finalizado", "O programa foi finalizado com sucesso!")
+messagebox.showinfo("Atenção", "A coleta foi realizada com sucesso!")
 
 # Fechar a janela Tkinter
 root.destroy()
