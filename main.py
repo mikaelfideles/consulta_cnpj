@@ -21,19 +21,17 @@ now = datetime.now()
 inicio_coleta = now.strftime("%d%m%Y_%H%M%S")
 
 # Aguardar 10 segundos para iniciar coleta
+print('A coleta será iniciada em 10 segundos')   
 time.sleep(10)
-print('Iniciando coleta...')    
 
 # Iterar através de cada linha do DataFrame 'consulta'
 for i, linha in consulta.iterrows():
 
-    # Atualizar página
+    # Atualizar página e aguardar 1 segundo
     pg.press('f5')
+    time.sleep(1)
 
-    # Aguardar 2 segundos
-    time.sleep(2)
-
-    # Exibir informações relevantes
+    # Print da etapa de consulta
     print('---------------------')
     print(f'CONSULTA: {i + 1} de {len(consulta)}')
     print('CNPJ: ' + linha['NUM_CNPJ'])
@@ -52,8 +50,8 @@ for i, linha in consulta.iterrows():
     time.sleep(0.1)
     pg.press('enter')
 
-    # Aguardar 2 segundos para carregamento da próxima página
-    time.sleep(2)
+    # Aguardar 1 segundos para carregamento da próxima página
+    time.sleep(1)
 
      # Selecionar e copiar a data da consulta
     pg.hotkey('ctrl', 'a')
@@ -68,16 +66,14 @@ for i, linha in consulta.iterrows():
         # Aguardar 1 segundo antes de repetir o processo
         time.sleep(1)
         
-        # Atualizar página
+        # Atualizar página e aguardar 1 segundo
         pg.press('f5')
+        time.sleep(1)
 
-        # Aguardar 2 segundos
-        time.sleep(2)
-
-        # Exibir informações relevantes
+        # Print da etapa de consulta
         print('---------------------')
         print(f'CONSULTA: {i + 1} de {len(consulta)}')
-        print('num_doc: ' + linha['NUM_CNPJ'])
+        print('CNPJ: ' + linha['NUM_CNPJ'])
     
         # Pressiona a tecla "tab" por n vezes
         presses = 6
@@ -94,7 +90,7 @@ for i, linha in consulta.iterrows():
         pg.press('enter')
 
         # Aguardar 2 segundos para carregamento da próxima página
-        time.sleep(2)
+        time.sleep(1)
 
         # Selecionar e copiar a data da consulta
         pg.hotkey('ctrl', 'a')
@@ -103,8 +99,6 @@ for i, linha in consulta.iterrows():
         # Atualizar os dados copiados na coluna 'COLETA'
         linha['COLETA'] = clipboard.paste()
 
-    #print(linha['COLETA'])
-    print('✓')
     time.sleep(0.1)
 
     nome_do_arquivo_excel = r'02_coleta_temp\coleta_temp.xlsx'
@@ -163,6 +157,7 @@ colunas_selecionadas = ['DATA_CONSULTA',
                         'NOME',
                         'SITUACAO_SIMPLES_NACIONAL',
                         'SITUACAO_SIMEI']
+
 df = df[colunas_selecionadas]
 
 nome_do_arquivo_excel = r'03_coleta\coleta_' + str(inicio_coleta) + '.xlsx'
