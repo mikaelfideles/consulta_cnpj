@@ -15,7 +15,7 @@ Permite consultar informações detalhadas de um CNPJ específico, como:
 
 - Clonar SSH do GitHub ou baixar Zip;
 - Criar virtual ou utilizar Python global, desde que possua as bibliotecas do arquivo requirements.txt instaladas;
-- Caso opte por usar o ambiente virtual, atualizar o endereço do python no arquivo "coletor.bat" [cd "C:\Users\...\consulta_cnpj\venv\Scripts"]
+- Caso opte por usar o ambiente virtual, atualizar o endereço do python no arquivo "coletor.bat" (cd "C:\Users\...\consulta_cnpj\venv\Scripts")
 
 ### Criando ambiente virtual
 
