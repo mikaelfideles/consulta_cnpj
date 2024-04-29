@@ -38,6 +38,3 @@ No terminal, digite:
 - 02: para cada CNPJ, consultar os dados no site do Simples Nacional;
 - 03: salvar todos os dados coletados (sem tratamento) no arquivo "coleta_temp.xlsx";
 - 04: tratar os dados do arquivo "coleta_temp.xlsx" e salvar um novo arquivo chamado no modelo "coleta_01012024_235959" (nome do arquivo + data + hora).
-
-
-teste giovanni
