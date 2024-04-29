@@ -14,9 +14,11 @@ Permite consultar informações detalhadas de um CNPJ específico, como:
 ## Como Usar
 
 - Clonar SSH do GitHub ou baixar Zip;
-- Recomenda-se criar um ambiente virtual através do pip install virtualenv venv, e instalar os pacotes do arquivo requirements.txt
- - pip install -r requirements.txt
-- No arquivo coletor.bat, alterar o endereço do ambiente virtual para o seu usuário >>> cd "C:\Users\...\consulta_cnpj\venv\Scripts" 
-Instalação das Dependências: Antes de utilizar a aplicação, certifique-se de instalar todas as dependências necessárias. Você pode fazer isso executando o comando pip install -r requirements.txt.
-Execução do Programa: Após instalar as dependências, execute o script principal consulta_cnpj.py para iniciar a aplicação.
-Consulta de CNPJ: Insira o CNPJ desejado na interface da aplicação e clique no botão de consulta para obter as informações correspondentes.
+- Criar virtual ou utilizar Python global, desde que possua as bibliotecas do arquivo requirements.txt instaladas;
+- Caso opte por usar o ambiente virtual, atualizar o endereço do python no arquivo "coletor.bat" [cd "C:\Users\...\consulta_cnpj\venv\Scripts"]
+
+### Criando ambiente virtual
+
+- pip install virtualenv venv
+- venv\scripts\activate
+- pip install -r requirements.txt
