@@ -1,4 +1,7 @@
 @echo off
-cd C:\Users\mikaelfideles\Documents\RG1NOT0340\myprojects\consulta_cnpj
-python main_02.py
+cd "C:\Users\mikae\OneDrive\Documentos\consulta_cnpj\venv_consulta_cnpj\Scripts"
+call activate
+cd ..
+cd ..
+python main.py
 pause

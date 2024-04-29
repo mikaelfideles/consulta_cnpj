@@ -10,59 +10,103 @@ from tkinter import messagebox
 root = tk.Tk()
 root.withdraw()  # Esconder a janela principal
 
-# Ler o arquivo Excel com os dados das consultas
-consulta = pd.read_excel(r'consulta_cnpj.xlsx', dtype=str)
-
-# Preencher valores nulos com strings vazias
-consulta = consulta.fillna('')
+# Ler o arquivo Excel com os dados das consultas, adicionar coluna 'COLETA' e substituir planilha
+consulta = pd.read_excel(r'consulta.xlsx', dtype=str).fillna('')
+consulta['COLETA'] = ''
+consulta.to_excel(r'coleta_temp\coleta_temp.xlsx', index=False)
+consulta = pd.read_excel(r'coleta_temp\coleta_temp.xlsx', dtype=str).fillna('')
 
 # Registrar o momento de início da coleta de dados
 now = datetime.now()
 inicio_coleta = now.strftime("%d%m%Y_%H%M%S")
 
+# Aguardar 10 segundos para iniciar coleta
 time.sleep(10)
 print('Iniciando coleta...')    
 
 # Iterar através de cada linha do DataFrame 'consulta'
 for i, linha in consulta.iterrows():
 
+    # Atualizar página
     pg.press('f5')
 
+    # Aguardar 2 segundos
     time.sleep(2)
 
     # Exibir informações relevantes
     print('-----------------------------------------')
-    print(linha['QTDE_CONSULTA'])
-    print('num_doc: ' + linha['NUM_CNPJ'])
+    print(f'CONSULTA: {i + 1} de {len(consulta)}')
+    print('CNPJ: ' + linha['NUM_CNPJ'])
   
+    # Pressiona a tecla "tab" por n vezes
     presses = 6
-
-    # Pressiona a tecla "Tab" várias vezes com um intervalo de 0.1 segundo
     for _ in range(presses):
-        pg.press('tab')
-        #time.sleep(0.1)        
+        pg.press('tab')    
     
     # Escrever o CNPJ na caixa de texto
     pg.write(linha['NUM_CNPJ'])
     time.sleep(0.1)
 
+    # Pressionar "tab" e "enter" com intervalo de 0.1 segundo
     pg.press('tab')
     time.sleep(0.1)
     pg.press('enter')
 
-    time.sleep(5)
+    # Aguardar 2 segundos para carregamento da próxima página
+    time.sleep(2)
 
      # Selecionar e copiar a data da consulta
     pg.hotkey('ctrl', 'a')
     pg.hotkey('ctrl', 'c')
     
-    # Atribuir a dados copiados copiada à coluna 'COLETA' da linha atual
+    # Atribuir os dados copiados à coluna 'COLETA' da linha atual
     linha['COLETA'] = clipboard.paste()
-    time.sleep(0.1)
+
+    # Enquanto a quantidade de caracteres copiados for menor ou igual a 60, repetir o processo
+    while len(linha['COLETA']) <= 100:
+       
+        # Aguardar 1 segundo antes de repetir o processo
+        time.sleep(1)
+        
+        # Atualizar página
+        pg.press('f5')
+
+        # Aguardar 2 segundos
+        time.sleep(2)
+
+        # Exibir informações relevantes
+        print('-----------------------------------------')
+        print(linha['QTDE_CONSULTA'])
+        print('num_doc: ' + linha['NUM_CNPJ'])
+    
+        # Pressiona a tecla "tab" por n vezes
+        presses = 6
+        for _ in range(presses):
+            pg.press('tab')       
+        
+        # Escrever o CNPJ na caixa de texto
+        pg.write(linha['NUM_CNPJ'])
+        time.sleep(0.1)
+
+        # Pressionar "tab" e "enter" com intervalo de 0.1 segundo
+        pg.press('tab')
+        time.sleep(0.1)
+        pg.press('enter')
+
+        # Aguardar 2 segundos para carregamento da próxima página
+        time.sleep(2)
+
+        # Selecionar e copiar a data da consulta
+        pg.hotkey('ctrl', 'a')
+        pg.hotkey('ctrl', 'c')
+            
+        # Atualizar os dados copiados na coluna 'COLETA'
+        linha['COLETA'] = clipboard.paste()
+
     print(linha['COLETA'])
     time.sleep(0.1)
 
-    nome_do_arquivo_excel = 'coleta_temp\coleta_temp.xlsx'
+    nome_do_arquivo_excel = r'coleta_temp\coleta_temp.xlsx'
     consulta.to_excel(nome_do_arquivo_excel, index=False)
 
 # Exibir uma mensagem indicando que o programa foi finalizado
@@ -83,7 +127,7 @@ for i, linha in consulta.iterrows():
 
     # Remover o texto "Data da consulta: " das linhas pertencentes à coluna "Data da consulta"
     partes[1] = partes[1].replace("Data da consulta: ", "")
-    partes[3] = partes[3].replace("CNPJ: ", "")
+    partes[3] = partes[3].replace("CNPJ: ", "").replace(".", "").replace("/", "").replace("-", "")
     partes[6] = partes[6].replace("Nome Empresarial: ", "")
     partes[8] = partes[8].replace("Situação no Simples Nacional: ", "")
     partes[9] = partes[9].replace("Situação no SIMEI: ", "")
@@ -120,7 +164,7 @@ colunas_selecionadas = ['Data da consulta',
                         'Situação no SIMEI']
 df = df[colunas_selecionadas]
 
-nome_do_arquivo_excel = 'coleta\coleta_' + str(inicio_coleta) + '.xlsx'
+nome_do_arquivo_excel = r'coleta\coleta_' + str(inicio_coleta) + '.xlsx'
 df.to_excel(nome_do_arquivo_excel, index=False)
 
 print(f'DataFrame exportado para {nome_do_arquivo_excel} com sucesso!')
