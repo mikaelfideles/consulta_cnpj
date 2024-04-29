@@ -11,10 +11,10 @@ root = tk.Tk()
 root.withdraw()  # Esconder a janela principal
 
 # Ler o arquivo Excel com os dados das consultas, adicionar coluna 'COLETA' e substituir planilha
-consulta = pd.read_excel(r'consulta.xlsx', dtype=str).fillna('')
+consulta = pd.read_excel(r'01_consulta\consulta.xlsx', dtype=str).fillna('')
 consulta['COLETA'] = ''
-consulta.to_excel(r'coleta_temp\coleta_temp.xlsx', index=False)
-consulta = pd.read_excel(r'coleta_temp\coleta_temp.xlsx', dtype=str).fillna('')
+consulta.to_excel(r'02_coleta_temp\coleta_temp.xlsx', index=False)
+consulta = pd.read_excel(r'02_coleta_temp\coleta_temp.xlsx', dtype=str).fillna('')
 
 # Registrar o momento de início da coleta de dados
 now = datetime.now()
@@ -106,7 +106,7 @@ for i, linha in consulta.iterrows():
     print(linha['COLETA'])
     time.sleep(0.1)
 
-    nome_do_arquivo_excel = r'coleta_temp\coleta_temp.xlsx'
+    nome_do_arquivo_excel = r'02_coleta_temp\coleta_temp.xlsx'
     consulta.to_excel(nome_do_arquivo_excel, index=False)
 
 # Exibir uma mensagem indicando que o programa foi finalizado
@@ -115,7 +115,7 @@ print('Coleta finalizada!')
 '---------------------------------------------------'
 
 # Ler o arquivo Excel
-consulta = pd.read_excel(r'coleta_temp\coleta_temp.xlsx', dtype=str)
+consulta = pd.read_excel(r'02_coleta_temp\coleta_temp.xlsx', dtype=str)
 
 # Lista para armazenar as linhas divididas em colunas
 linhas_divididas = []
@@ -164,7 +164,7 @@ colunas_selecionadas = ['Data da consulta',
                         'Situação no SIMEI']
 df = df[colunas_selecionadas]
 
-nome_do_arquivo_excel = r'coleta\coleta_' + str(inicio_coleta) + '.xlsx'
+nome_do_arquivo_excel = r'03_coleta\coleta_' + str(inicio_coleta) + '.xlsx'
 df.to_excel(nome_do_arquivo_excel, index=False)
 
 print(f'DataFrame exportado para {nome_do_arquivo_excel} com sucesso!')
