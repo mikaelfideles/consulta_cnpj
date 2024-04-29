@@ -11,14 +11,23 @@ Permite consultar informações detalhadas de um CNPJ específico, como:
 - Situação Simples Nacional;
 - Situação SIMEI.
 
-## Como Usar
+## Baixar dependências
 
 - Clonar SSH do GitHub ou baixar Zip;
-- Criar virtual ou utilizar Python global, desde que possua as bibliotecas do arquivo requirements.txt instaladas;
-- Caso opte por usar o ambiente virtual, atualizar o endereço do python no arquivo "coletor.bat" (cd "C:\Users\...\consulta_cnpj\venv\Scripts")
+- Criar virtual ou utilizar Python global (desde que possua as bibliotecas do arquivo requirements.txt instaladas).
 
-### Criando ambiente virtual
+## Criando ambiente virtual
 
+No terminal, digite:
+- cd C:\Users\...\consulta_cnpj (atualizar para o endereço real)
 - pip install virtualenv venv
 - venv\scripts\activate
 - pip install -r requirements.txt
+
+## Como usar
+
+- Listar todos os números de CNPJ (C:\Users\...\01_consulta\consulta.xlsx);
+- Restaurar dimensão do navegador para 50% da tela [win + up;  win + right] ou [win + up;  win + left];
+- Edite o endereço presente no arquivo coletor.bat (C:\Users\...\consulta_cnpj\venv\Scripts") ou execute o arquivo "main.py";
+- O tempo para inicializar o programa é de 10 segundos, sendo assim, deixe o navegador como janela ativa, para que o programa consiga percorrer todos os campos do html;
+- Após finalizar o programa, será exibido um alerta >>> messagebox.showinfo("Atenção", "A coleta foi realizada com sucesso!")
