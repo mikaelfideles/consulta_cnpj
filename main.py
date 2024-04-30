@@ -50,7 +50,7 @@ for i, linha in consulta.iterrows():
     pg.press('enter')
 
     # Aguardar 1 segundos para carregamento da próxima página
-    time.sleep(1)
+    time.sleep(2)
 
      # Selecionar e copiar a data da consulta
     pg.hotkey('ctrl', 'a')
@@ -90,7 +90,7 @@ for i, linha in consulta.iterrows():
         pg.press('enter')
 
         # Aguardar 2 segundos para carregamento da próxima página
-        time.sleep(1)
+        time.sleep(2)
 
         # Selecionar e copiar a data da consulta
         pg.hotkey('ctrl', 'a')
