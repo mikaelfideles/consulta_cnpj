@@ -6,6 +6,10 @@ import clipboard
 import tkinter as tk
 from tkinter import messagebox
 
+print('\nCOLETOR CNPJ SIMPLES NACIONAL')
+print('\n////////////////////////////////////////////////////////////')
+time.sleep(10)
+
 # Criar uma janela Tkinter
 root = tk.Tk()
 root.withdraw()  # Esconder a janela principal
@@ -20,10 +24,6 @@ consulta = pd.read_excel(r'02_coleta_temp\coleta_temp.xlsx', dtype=str).fillna('
 now = datetime.now()
 inicio_coleta = now.strftime("%d%m%Y_%H%M%S")
 
-# Aguardar 10 segundos para iniciar coleta
-print('A coleta será iniciada em 10 segundos')   
-time.sleep(10)
-
 # Iterar através de cada linha do DataFrame 'consulta'
 for i, linha in consulta.iterrows():
 
@@ -32,8 +32,7 @@ for i, linha in consulta.iterrows():
     time.sleep(1)
 
     # Print da etapa de consulta
-    print('---------------------')
-    print(f'CONSULTA: {i + 1} de {len(consulta)}')
+    print(f'\nCONSULTA: {i + 1} de {len(consulta)}')
     print('CNPJ: ' + linha['NUM_CNPJ'])
   
     # Pressiona a tecla "tab" por n vezes
@@ -59,7 +58,9 @@ for i, linha in consulta.iterrows():
     
     # Atribuir os dados copiados à coluna 'COLETA' da linha atual
     linha['COLETA'] = clipboard.paste()
-
+    print(linha['COLETA'])
+    print('////////////////////////////////////////////////////////////')
+    
     # Enquanto a quantidade de caracteres copiados for menor ou igual a 60, repetir o processo
     while len(linha['COLETA']) <= 100:
        
@@ -71,8 +72,7 @@ for i, linha in consulta.iterrows():
         time.sleep(1)
 
         # Print da etapa de consulta
-        print('---------------------')
-        print(f'CONSULTA: {i + 1} de {len(consulta)}')
+        print(f'\nCONSULTA: {i + 1} de {len(consulta)}')
         print('CNPJ: ' + linha['NUM_CNPJ'])
     
         # Pressiona a tecla "tab" por n vezes
@@ -98,16 +98,15 @@ for i, linha in consulta.iterrows():
             
         # Atualizar os dados copiados na coluna 'COLETA'
         linha['COLETA'] = clipboard.paste()
+        print(linha['COLETA'])
+        print('////////////////////////////////////////////////////////////')
 
     time.sleep(0.1)
 
     nome_do_arquivo_excel = r'02_coleta_temp\coleta_temp.xlsx'
     consulta.to_excel(nome_do_arquivo_excel, index=False)
 
-# Exibir uma mensagem indicando que o programa foi finalizado
-print('Coleta finalizada!')
-
-'---------------------'
+#---------------------------------
 
 # Ler o arquivo Excel
 consulta = pd.read_excel(r'02_coleta_temp\coleta_temp.xlsx', dtype=str)
@@ -163,10 +162,10 @@ df = df[colunas_selecionadas]
 nome_do_arquivo_excel = r'03_coleta\coleta_' + str(inicio_coleta) + '.xlsx'
 df.to_excel(nome_do_arquivo_excel, index=False)
 
-print(f'DataFrame exportado para {nome_do_arquivo_excel} com sucesso!')
+print(f'\nArquivo gerado com sucesso ...\{nome_do_arquivo_excel}\n')
 
 # Exibir uma mensagem de pop-up indicando que o programa foi finalizado
-messagebox.showinfo("Atenção", "A coleta foi realizada com sucesso!")
+messagebox.showinfo("MENSAGEM", 'Programa executado com sucesso!')
 
 # Fechar a janela Tkinter
 root.destroy()
