@@ -1,3 +1,5 @@
+# COLETOR CNPJ SIMPLES NACIONAL
+
 import time
 from datetime import datetime
 import pyautogui as pg
