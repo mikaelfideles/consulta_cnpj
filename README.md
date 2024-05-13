@@ -27,10 +27,10 @@ No terminal, digite:
 ## Como usar
 
 - Listar todos os números de CNPJ (C:\Users\...\01_consulta\consulta.xlsx);
-- Restaurar dimensão do navegador para 50% da tela [win + up;  win + right] ou [win + up;  win + left];
-- Edite o endereço presente no arquivo coletor.bat (C:\Users\...\consulta_cnpj\venv\Scripts") ou execute o arquivo "main.py";
+- Deixar navegador maximizado
+- Edite o endereço presente no arquivo coletor.bat ("C:\Users\...\github\consulta_cnpj") ou execute o arquivo "coletor.py";
 - O tempo para inicializar o programa é de 10 segundos, sendo assim, deixe o navegador como janela ativa, para que o programa consiga percorrer todos os campos do html;
-- Após finalizar o programa, será exibido um alerta >>> messagebox.showinfo("Atenção", "A coleta foi realizada com sucesso!").
+- Após finalizar o programa, será exibido um alerta >>> messagebox.showinfo("MENSAGEM", 'Programa executado com sucesso!')
 
 ## Processo executadas pelo programa
 
