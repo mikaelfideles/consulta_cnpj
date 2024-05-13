@@ -1,5 +1,6 @@
 # COLETOR CNPJ SIMPLES NACIONAL
 
+# Bibliotecas
 import time
 from datetime import datetime
 import pyautogui as pg
