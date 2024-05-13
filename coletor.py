@@ -36,7 +36,7 @@ for i, linha in consulta.iterrows():
     print('CNPJ: ' + linha['NUM_CNPJ'])
   
     # Pressiona a tecla "tab" por n vezes
-    presses = 6
+    presses = 7
     for _ in range(presses):
         pg.press('tab')    
     
@@ -76,7 +76,7 @@ for i, linha in consulta.iterrows():
         print('CNPJ: ' + linha['NUM_CNPJ'])
     
         # Pressiona a tecla "tab" por n vezes
-        presses = 6
+        presses = 7
         for _ in range(presses):
             pg.press('tab')       
         

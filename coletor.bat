@@ -1,7 +1,4 @@
 @echo off
-cd "C:\Users\...\consulta_cnpj\venv\Scripts"
-call activate
-cd ..
-cd ..
-python main.py
+cd /d "C:\Users\mikaelfideles\Documents\RG1NOT0340\myprojects\github\consulta_cnpj"
+python coletor.py
 pause
