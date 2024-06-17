@@ -52,10 +52,10 @@ for i, linha in consulta.iterrows():
     time.sleep(0.1)
     pg.press('enter')
 
-    # Aguardar 1 segundos para carregamento da próxima página
-    time.sleep(2)
+    # Aguardar 3 segundos para carregamento da próxima página
+    time.sleep(3)
 
-     # Selecionar e copiar a data da consulta
+    # Selecionar e copiar a data da consulta
     pg.hotkey('ctrl', 'a')
     pg.hotkey('ctrl', 'c')
     
@@ -63,8 +63,25 @@ for i, linha in consulta.iterrows():
     linha['COLETA'] = clipboard.paste()
     print(linha['COLETA'])
     print('////////////////////////////////////////////////////////////')
-    
-    # Enquanto a quantidade de caracteres copiados for menor ou igual a 60, repetir o processo
+
+    # Verificar se a mensagem "Informe um CNPJ válido." está presente
+    if "Informe um CNPJ válido." in linha['COLETA']:
+        linha['COLETA'] = (
+            "Consulta Optantes\n"
+            "Data da consulta: 00/00/0000 00:00:00\n"
+            "Identificação do Contribuinte - CNPJ Matriz\n"
+            #"CNPJ: 00.000.000/0000-00\n"
+            f"CNPJ: {linha['NUM_CNPJ']}\n"
+            "A opção pelo Simples Nacional e/ou SIMEI abrange todos os estabelecimentos da empresa\n"
+            "\n"
+            "Nome Empresarial: <cnpj_invalido>\n"
+            "Situação Atual\n"
+            "Situação no Simples Nacional: <cnpj_invalido>\n"
+            "Situação no SIMEI: <cnpj_invalido>\n"
+        )
+        continue  # Ir para a próxima iteração do loop
+
+    # Enquanto a quantidade de caracteres copiados for menor ou igual a 100, repetir o processo
     while len(linha['COLETA']) <= 100:
        
         # Aguardar 1 segundo antes de repetir o processo
@@ -92,8 +109,8 @@ for i, linha in consulta.iterrows():
         time.sleep(0.1)
         pg.press('enter')
 
-        # Aguardar 2 segundos para carregamento da próxima página
-        time.sleep(2)
+        # Aguardar 3 segundos para carregamento da próxima página
+        time.sleep(3)
 
         # Selecionar e copiar a data da consulta
         pg.hotkey('ctrl', 'a')
@@ -103,6 +120,23 @@ for i, linha in consulta.iterrows():
         linha['COLETA'] = clipboard.paste()
         print(linha['COLETA'])
         print('////////////////////////////////////////////////////////////')
+
+        # Verificar novamente se a mensagem "Informe um CNPJ válido." está presente
+        if "Informe um CNPJ válido." in linha['COLETA']:
+            linha['COLETA'] = (
+                "Consulta Optantes\n"
+                "Data da consulta: 00/00/0000 00:00:00\n"
+                "Identificação do Contribuinte - CNPJ Matriz\n"
+                #"CNPJ: 00.000.000/0000-00\n"
+                f"CNPJ: {linha['NUM_CNPJ']}\n"
+                "A opção pelo Simples Nacional e/ou SIMEI abrange todos os estabelecimentos da empresa\n"
+                "\n"
+                "Nome Empresarial: <cnpj_invalido>\n"
+                "Situação Atual\n"
+                "Situação no Simples Nacional: <cnpj_invalido>\n"
+                "Situação no SIMEI: <cnpj_invalido>\n"
+            )
+            break  # Sair do loop while e ir para a próxima iteração do loop for
 
     time.sleep(0.1)
 
@@ -117,20 +151,26 @@ consulta = pd.read_excel(r'02_coleta_temp\coleta_temp.xlsx', dtype=str)
 # Lista para armazenar as linhas divididas em colunas
 linhas_divididas = []
 
+# Função para verificar se uma linha está vazia
+def is_not_empty(line):
+    return any(column.strip() for column in line)
+
 # Iterar sobre as linhas da consulta
 for i, linha in consulta.iterrows():
-    # Dividir a linha em partes com base no caractere de quebra de linha '\n'
-    partes = linha['COLETA'].split('\n')
+    # Verificar se a linha não está vazia
+    if pd.notna(linha['COLETA']) and is_not_empty(linha['COLETA'].split('\n')):
+        # Dividir a linha em partes com base no caractere de quebra de linha '\n'
+        partes = linha['COLETA'].split('\n')
 
-    # Remover o texto "Data da consulta: " das linhas pertencentes à coluna "Data da consulta"
-    partes[1] = partes[1].replace("Data da consulta: ", "")
-    partes[3] = partes[3].replace("CNPJ: ", "").replace(".", "").replace("/", "").replace("-", "")
-    partes[6] = partes[6].replace("Nome Empresarial: ", "")
-    partes[8] = partes[8].replace("Situação no Simples Nacional: ", "")
-    partes[9] = partes[9].replace("Situação no SIMEI: ", "")
+        # Remover o texto "Data da consulta: " das linhas pertencentes à coluna "Data da consulta"
+        partes[1] = partes[1].replace("Data da consulta: ", "")
+        partes[3] = partes[3].replace("CNPJ: ", "").replace(".", "").replace("/", "").replace("-", "")
+        partes[6] = partes[6].replace("Nome Empresarial: ", "")
+        partes[8] = partes[8].replace("Situação no Simples Nacional: ", "")
+        partes[9] = partes[9].replace("Situação no SIMEI: ", "")
 
-    # Adicionar as partes à lista de linhas divididas
-    linhas_divididas.append(partes)
+        # Adicionar as partes à lista de linhas divididas
+        linhas_divididas.append(partes)
 
 # Converter a lista de linhas divididas em um DataFrame do Pandas
 df = pd.DataFrame(linhas_divididas)
