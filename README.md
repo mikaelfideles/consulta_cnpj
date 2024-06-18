@@ -1,40 +1,73 @@
-# Consulta de CNPJs no Site do Simples Nacional
+# COLETOR CNPJ SIMPLES NACIONAL
 
-Este projeto tem como objetivo fornecer uma ferramenta simples e eficiente para a consulta de CNPJs (Cadastro Nacional da Pessoa Jurídica) diretamente no site do Simples Nacional (https://www8.receita.fazenda.gov.br/SimplesNacional/aplicacoes.aspx?id=21), facilitando o acesso às informações de empresas de forma rápida e direta.
+## Introdução
 
-## Funcionalidades
+O script "Coletor CNPJ Simples Nacional" automatiza a coleta de informações de CNPJ a partir de uma fonte específica, utilizando a biblioteca `pyautogui` para interação com a interface gráfica, `pandas` para manipulação de dados e `clipboard` para copiar informações da área de transferência.
 
-Permite consultar informações detalhadas de um CNPJ específico, como:
-- Data consulta;
-- CNPJ;
-- Nome;
-- Situação Simples Nacional;
-- Situação SIMEI.
+## Bibliotecas Utilizadas
 
-## Baixar dependências
+- **time**: Para gerenciar atrasos temporais durante a execução do script.
+- **datetime**: Para registrar a data e hora do início da coleta de dados.
+- **pyautogui**: Para simular eventos de teclado e mouse.
+- **pandas**: Para manipulação de dados em planilhas Excel.
+- **clipboard**: Para copiar e colar dados da área de transferência.
+- **tkinter**: Para criar janelas e caixas de mensagem para interação com o usuário.
 
-- Clonar SSH do GitHub ou baixar Zip;
-- Criar virtual ou utilizar Python global (desde que possua as bibliotecas do arquivo requirements.txt instaladas).
+## Funcionalidade
 
-## Criando ambiente virtual
+### Passo 1: Inicialização
 
-No terminal, digite:
-- cd C:\Users\...\consulta_cnpj (atualizar para o endereço real)
-- pip install virtualenv venv
-- venv\scripts\activate
-- pip install -r requirements.txt
+1. **Mensagem de Boas-Vindas**:
+   - Exibe uma mensagem inicial e aguarda 10 segundos.
+   - Cria e esconde uma janela principal usando `tkinter`.
 
-## Como usar
+2. **Preparação da Planilha Excel**:
+   - Lê os dados de CNPJ a serem consultados de um arquivo Excel.
+   - Adiciona uma coluna 'COLETA' para armazenar os resultados.
+   - Salva os dados temporariamente em um novo arquivo Excel.
 
-- Listar todos os números de CNPJ (C:\Users\...\01_consulta\consulta.xlsx);
-- Deixar navegador maximizado
-- Edite o endereço presente no arquivo coletor.bat ("C:\Users\...\github\consulta_cnpj") ou execute o arquivo "coletor.py";
-- O tempo para inicializar o programa é de 10 segundos, sendo assim, deixe o navegador como janela ativa, para que o programa consiga percorrer todos os campos do html;
-- Após finalizar o programa, será exibido um alerta >>> messagebox.showinfo("MENSAGEM", 'Programa executado com sucesso!')
+3. **Registro do Início da Coleta**:
+   - Armazena a data e hora de início da coleta de dados.
 
-## Processo executadas pelo programa
+### Passo 2: Coleta de Dados
 
-- 01: Ler a lista de CNPJs a serem consultados no arquivo "consulta.xlsx";
-- 02: para cada CNPJ, consultar os dados no site do Simples Nacional;
-- 03: salvar todos os dados coletados (sem tratamento) no arquivo "coleta_temp.xlsx";
-- 04: tratar os dados do arquivo "coleta_temp.xlsx" e salvar um novo arquivo chamado no modelo "coleta_01012024_235959" (nome do arquivo + data + hora).
+1. **Iteração sobre cada Linha do DataFrame**:
+   - Atualiza a página web (tecla F5).
+   - Navega para o campo de entrada de CNPJ (7 tabs).
+   - Digita o CNPJ e executa a consulta (tab e enter).
+   - Aguarda o carregamento da página.
+
+2. **Cópia e Verificação dos Resultados**:
+   - Copia o conteúdo da página para a área de transferência.
+   - Verifica se a mensagem "Informe um CNPJ válido." está presente:
+     - Se sim, formata uma mensagem padrão indicando CNPJ inválido.
+   - Caso contrário, repete o processo se a quantidade de caracteres copiados for insuficiente.
+
+3. **Salvar Resultados Temporários**:
+   - Salva os resultados temporários em um arquivo Excel.
+
+### Passo 3: Processamento Final dos Dados
+
+1. **Leitura do Arquivo Temporário**:
+   - Lê os dados coletados do arquivo Excel temporário.
+
+2. **Divisão e Limpeza dos Dados**:
+   - Divide as linhas de resultados em colunas específicas.
+   - Remove textos desnecessários e formata os dados.
+
+3. **Criação do DataFrame Final**:
+   - Converte a lista de linhas divididas em um DataFrame.
+   - Renomeia as colunas e seleciona as colunas desejadas.
+
+4. **Salvar o Arquivo Final**:
+   - Salva o DataFrame final em um arquivo Excel nomeado com a data e hora de início da coleta.
+
+### Passo 4: Finalização
+
+1. **Mensagem de Sucesso**:
+   - Exibe uma mensagem de pop-up indicando que o programa foi executado com sucesso.
+   - Fecha a janela `tkinter`.
+
+## Uso
+
+Para executar o script, é necessário ter as bibliotecas mencionadas instaladas e os arquivos Excel nas pastas especificadas. Execute o script e siga as instruções na tela. Os resultados serão salvos em um novo arquivo Excel na pasta `03_coleta`.
