@@ -2,7 +2,7 @@
 
 ## Introdução
 
-O script "Coletor CNPJ Simples Nacional" automatiza a coleta de informações de CNPJ a partir de uma fonte específica, utilizando a biblioteca `pyautogui` para interação com a interface gráfica, `pandas` para manipulação de dados e `clipboard` para copiar informações da área de transferência.
+O script `coletor.py` automatiza a coleta de informações de CNPJ a partir de uma fonte específica, utilizando a biblioteca `pyautogui` para interação com a interface gráfica, `pandas` para manipulação de dados e `clipboard` para copiar informações da área de transferência.
 
 ## Bibliotecas Utilizadas
 
@@ -102,4 +102,4 @@ Para executar o script, é necessário ter as bibliotecas mencionadas instaladas
 
 ## Tratamento de Interrupção
 
-Se o script coletor.py for interrompido no meio do processo, pode-se executar o tratamento dos dados pelo script tratamento.py.
+Se o script `coletor.py` for interrompido no meio do processo, pode-se executar o tratamento dos dados pelo script `tratamento.py`.
