@@ -13,6 +13,34 @@ O script "Coletor CNPJ Simples Nacional" automatiza a coleta de informações de
 - **clipboard**: Para copiar e colar dados da área de transferência.
 - **tkinter**: Para criar janelas e caixas de mensagem para interação com o usuário.
 
+## Instalação das Bibliotecas
+
+Para instalar as bibliotecas necessárias, certifique-se de que você tem o pip instalado. Em seguida, execute o comando abaixo no terminal:
+pip install -r requirements.txt
+
+O arquivo requirements.txt deve conter as seguintes linhas (exemplo):
+clipboard==0.0.4
+et-xmlfile==1.1.0
+MouseInfo==0.1.3
+numpy==1.26.4
+openpyxl==3.1.2
+pandas==2.2.2
+pillow==10.3.0
+pip==24.0
+PyAutoGUI==0.9.54
+PyGetWindow==0.0.9
+PyMsgBox==1.0.9
+pyperclip==1.8.2
+PyRect==0.2.0
+PyScreeze==0.1.30
+python-dateutil==2.9.0.post0
+pytweening==1.2.0
+pytz==2024.1
+setuptools==69.5.1
+six==1.16.0
+tzdata==2024.1
+wheel==0.43.0
+
 ## Funcionalidade
 
 ### Passo 1: Inicialização
@@ -71,3 +99,7 @@ O script "Coletor CNPJ Simples Nacional" automatiza a coleta de informações de
 ## Uso
 
 Para executar o script, é necessário ter as bibliotecas mencionadas instaladas e os arquivos Excel nas pastas especificadas. Execute o script e siga as instruções na tela. Os resultados serão salvos em um novo arquivo Excel na pasta `03_coleta`.
+
+## Tratamento de Interrupção
+
+Se o script coletor.py for interrompido no meio do processo, pode-se executar o tratamento dos dados pelo script tratamento.py.
