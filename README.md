@@ -19,9 +19,9 @@ Para instalar as bibliotecas necessárias, certifique-se de que você tem o pip 
 pip install -r requirements.txt
 
 O arquivo requirements.txt deve conter as seguintes linhas (exemplo):
-`clipboard==0.0.4`
-`et-xmlfile==1.1.0`
-`MouseInfo==0.1.3`
+- `clipboard==0.0.4`
+- `et-xmlfile==1.1.0`
+- `MouseInfo==0.1.3`
 numpy==1.26.4
 openpyxl==3.1.2
 pandas==2.2.2
