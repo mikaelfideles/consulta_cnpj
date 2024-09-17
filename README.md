@@ -2,7 +2,7 @@
 
 ## Introdução
 
-O script `coletor.py` automatiza a coleta de informações de CNPJ a partir de uma fonte específica, utilizando a biblioteca `pyautogui` para interação com a interface gráfica, `pandas` para manipulação de dados e `clipboard` para copiar informações da área de transferência.
+O script `coletor.py` automatiza a coleta de informações de CNPJ a partir de uma fonte específica, utilizando as principais bibliotecas `pyautogui` para interação com a interface gráfica, `pandas` para manipulação de dados e `clipboard` para copiar informações da área de transferência.
 
 ## Bibliotecas Utilizadas
 
